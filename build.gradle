@@ -16,6 +16,14 @@ minecraft {
 	minecraftVersion = "1.6.4"
 }
 
+sourceSets {
+    main {
+        java {
+            srcDir 'NO/src/main/java'
+        }
+    }
+}
+
 processResources
 {
     from(sourceSets.main.resources.srcDirs) {

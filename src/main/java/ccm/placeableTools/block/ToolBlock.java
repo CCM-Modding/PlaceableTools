@@ -141,7 +141,7 @@ public class ToolBlock extends BlockContainer
 
     public ArrayList<ItemStack> getBlockDropped(World world, int x, int y, int z, int metadata, int fortune)
     {
-        return new ArrayList<>();
+        return new ArrayList<ItemStack>();
     }
 
     public void setBlockBoundsBasedOnState(IBlockAccess blockAccess, int x, int y, int z)

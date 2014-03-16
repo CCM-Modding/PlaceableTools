@@ -1,6 +1,8 @@
 buildscript {
     repositories {
         maven { url = "http://maven.dries007.net/content/repositories/ccm/" }
+        maven { url = "http://files.minecraftforge.net/maven/" }
+        maven { url = "https://libraries.minecraft.net/" }
         mavenCentral()
     }
     
@@ -14,17 +16,15 @@ configurations {
 }
 repositories {
     maven { url = "http://maven.dries007.net/content/repositories/ccm/" }
-}
-dependencies {
-    compile "ccm.nucleumOmnium:NucleumOmnium:latest.integration"
+    maven { url = "http://files.minecraftforge.net/maven/" }
+    maven { url = "https://libraries.minecraft.net/" }
 }
 
 apply plugin: "gmcp"
 apply plugin: "maven"
 
 group = "ccm.placeableTools"
-
-version = "v1.0.0." + System.getenv().BUILD_NUMBER
+version = "1.0.0"
 
 targetCompatibility = 1.6
 sourceCompatibility = 1.6
@@ -32,6 +32,14 @@ sourceCompatibility = 1.6
 archivesBaseName = 'PlaceableTools'
 minecraft {
 	minecraftVersion = "1.6.4"
+}
+
+ext.BUILD_NUMBER = System.getenv().BUILD_NUMBER;
+if (ext.BUILD_NUMBER == null) ext.BUILD_NUMBER = "0"
+version = project.minecraft.minecraftVersion + "-" + version + "." + ext.BUILD_NUMBER
+
+dependencies {
+    compile("ccm.nucleumOmnium:NucleumOmnium:" + project.minecraft.minecraftVersion + "-2.+:dev")
 }
 
 processResources {
@@ -45,8 +53,20 @@ processResources {
     }
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'dev-src'
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+	classifier = 'dev'
+}
+
 artifacts {
 	archives jar
+    archives sourcesJar
+    archives deobfJar
 }
 
 uploadArchives {

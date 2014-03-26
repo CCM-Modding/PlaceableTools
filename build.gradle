@@ -70,54 +70,56 @@ artifacts {
 }
 
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: mavenUrl) {
-                authentication(userName: mavenUser, password: mavenPassword)
-            }
-            pom {
-                groupId = project.group
-                version = project.version
-                artifactId = project.archivesBaseName
-                project {
-                    name project.archivesBaseName
-                    packaging 'jar'
-                    description 'Adds the ability to place tools in the world!'
-                    url 'https://github.com/CCM-Modding/PlaceableTools'
+ if (project.hasProperty("mavenUrl")) {
+		repositories {
+			mavenDeployer {
+				repository(url: mavenUrl) {
+					authentication(userName: mavenUser, password: mavenPassword)
+				}
+				pom {
+					groupId = project.group
+					version = project.version
+					artifactId = project.archivesBaseName
+					project {
+						name project.archivesBaseName
+						packaging 'jar'
+						description 'Adds the ability to place tools in the world!'
+						url 'https://github.com/CCM-Modding/PlaceableTools'
 
-                    scm {
-                        url 'https://github.com/CCM-Modding/PlaceableTools'
-                        connection 'scm:git:git://github.com/CCM-Modding/PlaceableTools.git'
-                        developerConnection 'scm:git:git@github.com:CCM-Modding/PlaceableTools.git'
-                    }
+						scm {
+							url 'https://github.com/CCM-Modding/PlaceableTools'
+							connection 'scm:git:git://github.com/CCM-Modding/PlaceableTools.git'
+							developerConnection 'scm:git:git@github.com:CCM-Modding/PlaceableTools.git'
+						}
 
-                    issueManagement {
-                        system 'github'
-                        url 'https://github.com/CCM-Modding/PlaceableTools/issues'
-                    }
+						issueManagement {
+							system 'github'
+							url 'https://github.com/CCM-Modding/PlaceableTools/issues'
+						}
 
-                    licenses  {
-                        license  {
-                            name 'MIT License'
-                            url 'https://raw.github.com/CCM-Modding/PlaceableTools/master/LICENCE'
-                            distribution 'repo'
-                        }
-                    }
+						licenses  {
+							license  {
+								name 'MIT License'
+								url 'https://raw.github.com/CCM-Modding/PlaceableTools/master/LICENCE'
+								distribution 'repo'
+							}
+						}
 
-                    developers {
-                        developer {
-                            id 'Dries007'
-                            name 'Dries007'
-                            roles { role 'developer' }
-                        }
-                        developer {
-                            id 'Claycorp'
-                            name 'Claycorp'
-                            roles { role 'architect' }
-                        }
-                    }
-                }
-           }
-       }
-    }
+						developers {
+							developer {
+								id 'Dries007'
+								name 'Dries007'
+								roles { role 'developer' }
+							}
+							developer {
+								id 'Claycorp'
+								name 'Claycorp'
+								roles { role 'architect' }
+							}
+						}
+					}
+			   }
+		   }
+		}
+	}
 }

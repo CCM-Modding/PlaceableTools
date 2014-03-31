@@ -1,16 +1,22 @@
-[
 {
-  "modid": "PlaceableTools",
-  "name": "PlaceableTools",
-  "description": "Adds in-world placeable tools.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/CCM-Modding/PlaceableTools",
-  "updateUrl": "",
-  "authors": ["Dries007"],
-  "credits": "Claycorp for comping up with this spielerei.",
-  "logoFile": "PlaceableTools.png",
-  "screenshots": [],
-  "dependencies": ["after:NucleumOmnium"]
+  "modinfoversion": 2,
+  "modlist": [{
+    "modid": "PlaceableTools",
+    "name": "PlaceableTools",
+    "description": "Go make that factory!",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/CCM-Modding/PlaceableTools",
+    "authors": [ "Dries007" ],
+    "credits": "Claycorp for idea, BC for code example.",
+    "logoFile": "PlaceableTools.png",
+    "requiredMods": [
+        "Forge",
+        "NucleumOmnium" 
+    ],
+    "dependencies": [ 
+        "NucleumOmnium@[${nucleumOmniumVersion},)"
+    ],
+    "useDependencyInformation": "true"
+  }]
 }
-]

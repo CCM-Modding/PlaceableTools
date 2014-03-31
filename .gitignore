@@ -6,4 +6,4 @@ out
 *.ipr
 *.iws
 .idea
-src/TinkersConstruct/*
+src/libs/*

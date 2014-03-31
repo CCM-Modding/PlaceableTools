@@ -23,6 +23,8 @@
 
 package ccm.placeableTools;
 
+import ccm.placeableTools.block.BucketBlock;
+import ccm.placeableTools.block.BucketTE;
 import ccm.placeableTools.block.ToolBlock;
 import ccm.placeableTools.block.ToolTE;
 import ccm.placeableTools.util.EventHandler;
@@ -32,7 +34,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 
 public class CommonProxy
 {
@@ -42,6 +43,11 @@ public class CommonProxy
         GameRegistry.registerTileEntity(ToolTE.class, "ToolTE");
         GameRegistry.registerBlock(ToolBlock.getInstance(), "ToolBlock");
         LanguageRegistry.addName(ToolBlock.getInstance(), "ToolBlock");
+
+        new BucketBlock(PlaceableTools.getConfig().bucketBlockID);
+        GameRegistry.registerTileEntity(BucketTE.class, "BucketTE");
+        GameRegistry.registerBlock(BucketBlock.getInstance(), "BucketBlock");
+        LanguageRegistry.addName(BucketBlock.getInstance(), "BucketBlock");
 
         EventHandler.INSTANCE.init();
         GuiHandler.INSTANCE.init();

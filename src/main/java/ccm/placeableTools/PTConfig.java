@@ -31,12 +31,15 @@ public class PTConfig
 {
     public boolean dontCareAboutMaterial = false;
     public int toolBlockID = 270;
+    public int bucketBlockID = 271;
+
 
     public PTConfig(File cfgFile)
     {
         final Configuration config = new Configuration(cfgFile);
 
         toolBlockID = config.getBlock("toolBlockID", toolBlockID).getInt();
+        bucketBlockID = config.getBlock("bucketBlockID", bucketBlockID).getInt();
         dontCareAboutMaterial = config.get(Configuration.CATEGORY_GENERAL, "dontCareAboutMaterial", dontCareAboutMaterial, "Allows you to place all tools on all blocks.").getBoolean(dontCareAboutMaterial);
 
         config.save();

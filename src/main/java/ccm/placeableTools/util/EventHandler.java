@@ -1,6 +1,7 @@
 package ccm.placeableTools.util;
 
 import ccm.placeableTools.PlaceableTools;
+import ccm.placeableTools.block.BucketBlock;
 import ccm.placeableTools.block.ToolBlock;
 import ccm.placeableTools.block.ToolTE;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
@@ -97,6 +98,18 @@ public class EventHandler
                     world.setBlock(x, y, z, ToolBlock.getInstance().blockID, meta, 3);
                     ToolBlock.getInstance().onBlockPlacedBy(world, x, y, z, event.entityPlayer, itemStack);
                 }
+            }
+        }
+
+        if (event.entityPlayer.isSneaking() && (itemStack.getItem() instanceof ItemBucket || itemStack.getItem() instanceof ItemBucketMilk))
+        {
+            int x = event.x, y = event.y, z = event.z;
+            y++;
+            if (world.isAirBlock(x, y, z) && world.isBlockSolidOnSide(event.x, event.y, event.z, ForgeDirection.UP))
+            {
+                event.setCanceled(true);
+                world.setBlock(x, y, z, BucketBlock.getInstance().blockID, 0, 3);
+                BucketBlock.getInstance().onBlockPlacedBy(world, x, y, z, event.entityPlayer, itemStack);
             }
         }
     }

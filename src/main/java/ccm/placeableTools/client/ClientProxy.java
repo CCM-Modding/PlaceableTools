@@ -24,16 +24,13 @@
 package ccm.placeableTools.client;
 
 import ccm.placeableTools.CommonProxy;
+import ccm.placeableTools.block.BucketTE;
 import ccm.placeableTools.block.ToolTE;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.VillagerRegistry;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-
-import static ccm.placeableTools.util.PTConstants.*;
 
 public class ClientProxy extends CommonProxy
 {
@@ -48,6 +45,7 @@ public class ClientProxy extends CommonProxy
         super.preInit(event);
 
         ClientRegistry.bindTileEntitySpecialRenderer(ToolTE.class, new ToolRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(BucketTE.class, new BucketRenderer());
     }
 
     @Override

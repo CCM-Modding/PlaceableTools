@@ -29,7 +29,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
@@ -53,7 +52,6 @@ public class ToolBlock extends BlockContainer
     public ToolBlock(int par1)
     {
         super(par1, Material.circuits);
-        setCreativeTab(CreativeTabs.tabBlock);
         setHardness(1.5F);
         setResistance(5F);
         setUnlocalizedName("ToolBlock");
@@ -63,7 +61,7 @@ public class ToolBlock extends BlockContainer
     public boolean checkMaterial(Material material, Item tool)
     {
         if (PlaceableTools.getConfig().dontCareAboutMaterial) return true;
-        if (tool instanceof ItemSpade || tool instanceof ItemHoe) return material == Material.grass || material == Material.ground || material == Material.craftedSnow || material == Material.clay || material == Material.snow || material == Material.sand || material == Material.cloth;
+        else if (tool instanceof ItemSpade || tool instanceof ItemHoe) return material == Material.grass || material == Material.ground || material == Material.craftedSnow || material == Material.clay || material == Material.snow || material == Material.sand || material == Material.cloth;
         else if (tool instanceof ItemAxe || tool instanceof ItemSword)
             return material == Material.grass || material == Material.ground || material == Material.craftedSnow || material == Material.clay || material == Material.snow || material == Material.sand || material == Material.wood || material == Material.cloth;
         else if (tool instanceof ItemPickaxe) return true;

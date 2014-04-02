@@ -109,6 +109,15 @@ public class ToolBlock extends BlockContainer
     }
 
     @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, int blockID)
+    {
+        super.onNeighborBlockChange(world, x, y, z, blockID);
+
+        if (world.isRemote) return;
+        ((ToolTE)world.getBlockTileEntity(x, y, z)).onNeighborBlockChange();
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World world)
     {
         return new ToolTE(world);

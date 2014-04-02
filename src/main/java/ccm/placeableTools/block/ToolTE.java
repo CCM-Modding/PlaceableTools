@@ -27,6 +27,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,10 +38,9 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
-import static ccm.placeableTools.util.PTConstants.*;
-
-import java.util.ArrayList;
+import static ccm.placeableTools.util.PTConstants.TEXT_JOINER;
 
 public class ToolTE extends TileEntity
 {
@@ -176,5 +176,20 @@ public class ToolTE extends TileEntity
             sign2Text = strings;
         }
         PacketDispatcher.sendPacketToAllInDimension(getDescriptionPacket(), worldObj.provider.dimensionId);
+    }
+
+
+    public void onNeighborBlockChange()
+    {
+        int meta = getBlockMetadata();
+
+        ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[meta];
+
+        Material material = worldObj.getBlockMaterial(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+
+        if (!ToolBlock.getInstance().checkMaterial(material, stack.getItem())) //We need to pop off
+        {
+            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+        }
     }
 }

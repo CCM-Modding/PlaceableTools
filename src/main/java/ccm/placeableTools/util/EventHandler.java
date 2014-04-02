@@ -101,7 +101,7 @@ public class EventHandler
             }
         }
 
-        if (event.entityPlayer.isSneaking() && (itemStack.getItem() instanceof ItemBucket || itemStack.getItem() instanceof ItemBucketMilk))
+        if (event.entityPlayer.isSneaking() && itemStack.getItem() instanceof ItemBucket)
         {
             int x = event.x, y = event.y, z = event.z;
             y++;

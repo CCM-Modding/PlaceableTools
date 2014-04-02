@@ -37,6 +37,17 @@ public class BucketBlock extends BlockContainer
     }
 
     @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+    {
+        return ((BucketTE) world.getBlockTileEntity(x, y, z)).activate(player, side, hitX, hitY, hitZ);
+    }
+
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
+    {
+        ((BucketTE) world.getBlockTileEntity(x, y, z)).standIn(entity);
+    }
+
+    @Override
     public void breakBlock(World par1World, int x, int y, int z, int blockID, int meta)
     {
         TileEntity te = par1World.getBlockTileEntity(x, y, z);
@@ -111,7 +122,7 @@ public class BucketBlock extends BlockContainer
     {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
-        float f = 0.125F;
+        float f = 0.03F;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
@@ -125,8 +136,12 @@ public class BucketBlock extends BlockContainer
 
     public void setBlockBoundsForItemRender()
     {
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+        this.setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
     }
 
-
+    @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
+        return ((BucketTE)world.getBlockTileEntity(x, y, z)).getLightLevel();
+    }
 }

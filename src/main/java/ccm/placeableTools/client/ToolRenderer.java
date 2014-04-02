@@ -107,7 +107,7 @@ public class ToolRenderer extends TileEntitySpecialRenderer
 
         GL11.glTranslatef(0.0F, -0.3125F, -0.4375F);
         GL11.glTranslatef(0f, 0.8F, 0.5f);
-        this.MODEL_SIGN.signStick.showModel = false;
+        MODEL_SIGN.signStick.showModel = false;
 
         if (facing > 4)
         {
@@ -123,7 +123,7 @@ public class ToolRenderer extends TileEntitySpecialRenderer
         this.bindTexture(SIGN_TEXTURE);
         GL11.glPushMatrix();
         GL11.glScalef(f1, -f1, -f1);
-        this.MODEL_SIGN.renderSign();
+        MODEL_SIGN.renderSign();
         GL11.glPopMatrix();
         FontRenderer fontrenderer = this.getFontRenderer();
         f2 = 0.016666668F * f1;

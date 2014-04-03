@@ -12,7 +12,8 @@ import cpw.mods.fml.common.network.NetworkMod;
 import java.io.File;
 import java.util.logging.Logger;
 
-import static ccm.placeableTools.util.PTConstants.*;
+import static ccm.placeableTools.util.PTConstants.CHANNEL_SIGN_UPDATE;
+import static ccm.placeableTools.util.PTConstants.MODID;
 
 @Mod(modid = MODID, dependencies = "required-after:NucleumOmnium")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {CHANNEL_SIGN_UPDATE}, packetHandler = PacketHandler.class)

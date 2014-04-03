@@ -114,7 +114,7 @@ public class ToolBlock extends BlockContainer
         super.onNeighborBlockChange(world, x, y, z, blockID);
 
         if (world.isRemote) return;
-        ((ToolTE)world.getBlockTileEntity(x, y, z)).onNeighborBlockChange();
+        ((ToolTE) world.getBlockTileEntity(x, y, z)).onNeighborBlockChange();
     }
 
     @Override

@@ -35,7 +35,7 @@ public class GuiHandler implements IGuiHandler
 {
     public static final GuiHandler INSTANCE = new GuiHandler();
 
-    public static final int swordSign      = 0;
+    public static final int swordSign = 0;
 
     private GuiHandler()
     {

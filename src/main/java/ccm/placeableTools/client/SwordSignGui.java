@@ -40,7 +40,7 @@ import org.lwjgl.opengl.GL11;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-import static ccm.placeableTools.util.PTConstants.*;
+import static ccm.placeableTools.util.PTConstants.CHANNEL_SIGN_UPDATE;
 
 @SideOnly(Side.CLIENT)
 public class SwordSignGui extends GuiScreen

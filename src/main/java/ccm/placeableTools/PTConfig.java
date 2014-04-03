@@ -30,8 +30,8 @@ import java.io.File;
 public class PTConfig
 {
     public boolean dontCareAboutMaterial = false;
-    public int toolBlockID = 270;
-    public int bucketBlockID = 271;
+    public int     toolBlockID           = 270;
+    public int     bucketBlockID         = 271;
 
 
     public PTConfig(File cfgFile)

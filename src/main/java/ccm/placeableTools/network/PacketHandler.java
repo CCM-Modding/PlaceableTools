@@ -1,12 +1,8 @@
 package ccm.placeableTools.network;
 
-import ccm.nucleumOmnium.helpers.MiscHelper;
-import ccm.nucleumOmnium.helpers.NetworkHelper;
 import ccm.placeableTools.block.ToolTE;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;

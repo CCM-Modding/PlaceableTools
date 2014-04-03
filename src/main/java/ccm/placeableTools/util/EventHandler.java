@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class EventHandler
 {
-    public static final EventHandler INSTANCE    = new EventHandler();
+    public static final EventHandler INSTANCE = new EventHandler();
 
     private EventHandler() {}
 

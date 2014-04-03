@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class BucketBlock extends BlockContainer
 {
@@ -142,6 +143,13 @@ public class BucketBlock extends BlockContainer
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
-        return ((BucketTE)world.getBlockTileEntity(x, y, z)).getLightLevel();
+        return ((BucketTE) world.getBlockTileEntity(x, y, z)).getLightLevel();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random random)
+    {
+        ((BucketTE) world.getBlockTileEntity(x, y, z)).randomDisplayTick(random);
     }
 }

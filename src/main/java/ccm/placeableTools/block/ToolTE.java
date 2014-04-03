@@ -30,6 +30,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -182,12 +184,13 @@ public class ToolTE extends TileEntity
     public void onNeighborBlockChange()
     {
         int meta = getBlockMetadata();
-
         ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[meta];
+
+        if (stack.getItem() instanceof ItemSpade || stack.getItem() instanceof ItemHoe) direction = ForgeDirection.DOWN;
 
         Material material = worldObj.getBlockMaterial(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
 
-        if (!ToolBlock.getInstance().checkMaterial(material, stack.getItem())) //We need to pop off
+        if (material == null || stack == null || !ToolBlock.getInstance().checkMaterial(material, stack.getItem())) //We need to pop off
         {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
         }

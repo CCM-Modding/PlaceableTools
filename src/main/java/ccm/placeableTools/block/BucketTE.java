@@ -6,7 +6,10 @@ import net.minecraft.block.BlockColored;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -19,10 +22,12 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.Random;
+
 public class BucketTE extends TileEntity
 {
     private ItemStack stack;
-    private Fluid fluid;
+    private Fluid     fluid;
 
     public BucketTE()
     {
@@ -135,9 +140,9 @@ public class BucketTE extends TileEntity
         ItemStack itemstack = player.getHeldItem();
         if (itemstack != null && fluid == FluidRegistry.WATER)
         {
-            if (itemstack.getItem() instanceof ItemArmor && ((ItemArmor)itemstack.getItem()).getArmorMaterial() == EnumArmorMaterial.CLOTH)
+            if (itemstack.getItem() instanceof ItemArmor && ((ItemArmor) itemstack.getItem()).getArmorMaterial() == EnumArmorMaterial.CLOTH)
             {
-                ItemArmor itemarmor = (ItemArmor)itemstack.getItem();
+                ItemArmor itemarmor = (ItemArmor) itemstack.getItem();
                 itemarmor.removeColor(itemstack);
                 return true;
             }
@@ -157,5 +162,38 @@ public class BucketTE extends TileEntity
         }
 
         return false;
+    }
+
+    public void randomDisplayTick(Random random)
+    {
+        if (fluid != null && fluid.getTemperature() >= 700)
+        {
+            int rndFactor = 10;
+            if (worldObj.isRaining())
+            {
+                rndFactor /= 2;
+                worldObj.playSoundEffect((double) ((float) xCoord + 0.5F), (double) ((float) yCoord + 0.5F), (double) ((float) zCoord + 0.5F), "random.fizz", 0.5F, 2.6F + (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.8F);
+                worldObj.spawnParticle("largesmoke", (double) xCoord + Math.random(), (double) yCoord + 1.2D, (double) zCoord + Math.random(), 0.0D, 0.0D, 0.0D);
+            }
+
+            if (fluid == FluidRegistry.WATER && random.nextInt(rndFactor * 2) == 0)
+            {
+                worldObj.playSound((double) ((float) xCoord + 0.5F), (double) ((float) yCoord + 0.5F), (double) ((float) zCoord + 0.5F), "liquid.water", random.nextFloat() * 0.25F + 0.75F, random.nextFloat() * 1.0F + 0.5F, false);
+            }
+
+            if (fluid == FluidRegistry.LAVA)
+            {
+                if (random.nextInt(rndFactor) == 0)
+                {
+                    double d5 = (double) ((float) xCoord + random.nextFloat());
+                    double d7 = (double) yCoord + 1;
+                    double d6 = (double) ((float) zCoord + random.nextFloat());
+                    worldObj.spawnParticle("lava", d5, d7, d6, 0.0D, 0.0D, 0.0D);
+                    worldObj.playSound(d5, d7, d6, "liquid.lavapop", 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+                }
+
+                if (random.nextInt(rndFactor * 2) == 0) worldObj.playSound((double) xCoord, (double) yCoord, (double) zCoord, "liquid.lava", 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+            }
+        }
     }
 }
